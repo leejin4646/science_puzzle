@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>가로세로 퍼즐 (모바일 최적화)</title>
+<title>가로세로 퍼즐 (최종 완성)</title>
 <style>
     body {
         font-family:'Nanum Gothic',sans-serif;
         text-align:center;
         background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA5MDZfMyAg%2FMDAxNTA0NjU4MDg5MzYz.k_xvYKxGAe4D_fCtiMGCX-PLesGOkLUVM7HFrvGT5EQg.m1ipd6amBQKk1inByv0mpl-8lrww11uuyAgxoa8Wfd0g.JPEG.oasisman8%2F1.jpg&type=sc960_832') no-repeat center center fixed;
         background-size: cover;
-        position: relative;
         margin: 0;
     }
     body::before {
@@ -21,19 +20,8 @@
         background: rgba(0,0,0,0.3);
         z-index: -1;
     }
-    h1 {
-        margin:15px;
-        font-size:1.8rem;
-        color:#fff;
-        text-shadow:1px 1px 3px rgba(0,0,0,0.8);
-    }
-    .score {
-        font-size:1.2rem;
-        margin-bottom:15px;
-        color:#fff;
-        text-shadow:1px 1px 3px rgba(0,0,0,0.8);
-    }
-    /* ✅ 퍼즐 반응형 */
+    h1 {margin:15px;font-size:1.8rem;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.8);}
+    .score {font-size:1.2rem;margin-bottom:15px;color:#fff;}
     .puzzle-container {
         display:grid;
         grid-template-columns: repeat(17, minmax(18px, 1fr));
@@ -54,8 +42,7 @@
         align-items:center;
     }
     .white input {
-        width:100%;
-        height:100%;
+        width:100%;height:100%;
         text-align:center;
         font-size:1em;
         font-weight:bold;
@@ -69,8 +56,8 @@
     .green input {background:#4CAF50;color:#fff;font-weight:bold;}
     .number {
         position:absolute;
-        top:2px;left:3px;
-        font-size:0.6em;
+        top:1px;left:2px;
+        font-size:0.55em;
         color:#000;
     }
     .questions {
@@ -81,31 +68,18 @@
         border-radius:8px;
         box-shadow:0 2px 8px rgba(0,0,0,0.4);
     }
-    /* ✅ 아코디언 */
     .accordion-title {
-        background:#4CAF50;
-        color:#fff;
-        padding:8px;
-        cursor:pointer;
-        font-weight:bold;
-        text-align:left;
-        border-radius:4px;
-        margin-bottom:5px;
+        background:#4CAF50;color:#fff;padding:8px;
+        cursor:pointer;font-weight:bold;text-align:left;
+        border-radius:4px;margin-bottom:5px;
     }
     .accordion-content {
-        display:none;
-        padding:8px;
-        text-align:left;
-        font-size:14px;
+        display:none;padding:8px;text-align:left;font-size:14px;
     }
-    .solved::after {
-        content:" ✅";
-        color:green;
-        font-weight:bold;
-    }
-    @media (max-width:768px) {
-        .white input {font-size:3.5vw;}
-        h1 {font-size:1.5rem;}
+    .solved::after {content:" ✅";color:green;font-weight:bold;}
+    @media (max-width:768px){
+        .white input{font-size:3.5vw;}
+        h1{font-size:1.5rem;}
     }
 </style>
 </head>
@@ -122,7 +96,6 @@
 </div>
 
 <script>
-/* ✅ 아코디언 토글 */
 function toggleAccordion(id){
     const el=document.getElementById(id);
     el.style.display=(el.style.display==='block')?'none':'block';
@@ -138,15 +111,16 @@ const pattern=[
 "xoxxxoxoooxxxxxxx","xoooxoxxxxxxxxxxx","xxxxxoxxxxxxxxxxx"
 ];
 
-/* ✅ 좌표 데이터 */
-const coords=[[1,1,1],[2,1,3],[3,4,2],[4,5,1],[5,1,5],[6,1,10],[7,2,7],[8,3,9],[9,3,13],
-[10,5,11],[11,2,16],[12,6,17],[13,8,12],[14,7,10],[15,9,5],[16,10,2],
-[17,11,7],[18,7,2],[19,5,7],[20,12,9],[21,15,11],[22,11,13],[23,11,15],
-[24,12,17],[25,15,15],[26,17,12],[27,18,10],[28,20,2],[29,19,6],[30,16,3],
-[31,16,6],[32,16,9],[33,1,14],[34,14,9],[35,15,14],[36,11,13],[37,20,1],
-[38,21,8],[39,22,2],[40,19,6],[41,16,1],[42,17,5],[43,17,8],[44,9,15],
-[45,8,1],[46,6,3],[47,5,15],[48,4,10],[49,3,7],[50,2,5],[51,1,11],
-[52,7,13],[53,13,2],[54,18,10],[55,10,6]];
+/* ✅ 최종 좌표 데이터 (네 요구 100% 반영) */
+const coords=[
+[1,1,1],[2,1,3],[3,4,2],[4,5,1],[5,1,5],[6,1,5],[7,2,7],[8,1,10],[9,1,11],
+[10,3,9],[11,3,13],[12,5,11],[13,7,13],[14,2,16],[15,3,15],[16,5,15],[17,6,17],
+[18,9,15],[19,8,12],[20,9,12],[21,7,10],[22,8,9],[23,9,5],[24,10,2],[25,11,1],
+[26,13,2],[27,11,7],[28,6,3],[29,7,2],[30,8,1],[31,5,7],[32,7,5],[33,12,9],
+[34,14,9],[35,15,11],[36,11,13],[37,11,15],[38,12,17],[39,15,14],[40,15,15],
+[41,17,12],[42,18,10],[43,20,11],[44,21,8],[45,20,1],[46,20,2],[47,22,2],
+[48,19,6],[49,16,3],[50,16,1],[51,16,6],[52,17,5],[53,16,9],[54,17,8],[55,1,14]
+];
 
 /* ✅ 정답 */
 const answers={1:"탐구",2:"원생생물",3:"대물렌즈",4:"균류",5:"접안렌즈",6:"안전수칙",7:"수온",8:"카시오페이아",9:"시간",10:"포자",
@@ -156,57 +130,21 @@ const answers={1:"탐구",2:"원생생물",3:"대물렌즈",4:"균류",5:"접안
 40:"작은곰자리",41:"온도와열",42:"결론도출",43:"단열",44:"쓰임새",45:"첨단생명과학",46:"단열재",47:"재물대",
 48:"광학현미경",49:"인내심",50:"문제인식",51:"행성",52:"토성",53:"체온",54:"기온",55:"이동"};
 
-/* ✅ 문제 전체 */
-const across={
-3:"현미경에서 물체의 상을 확대해주는 렌즈",4:"곰팡이나 버섯 같은 생물로, 보통 거미줄처럼 가늘고 긴 모양의 균사로 이루어져 있고 포자로 번식함.",
-6:"실험하는 동안 ○○○○을 지킵니다.",8:"북극성은 밤하늘에서 북두칠성이나 ○○○○○○자리를 이용해 찾을 수 있다.",
-10:"식물은 씨로 번식하고 균류는 ○○로 번식한다.",12:"태양과 태양의 영향을 받는 천체들 그리고 그 공간",
-13:"별의 무리를 구분해 사람이나 사물 또는 동물의 이름을 붙인 것",15:"태양계에서 가장 큰 행성으로 기체형 행성이다.",
-16:"균류나 원생식물보다 크기가 더 작고 생김새가 단순한 생물",18:"물질의 차갑거나 따뜻한 정도",
-20:"고체에서 열이 온도가 높은 곳에서 낮은 곳으로 고체 물질을 따라 이동하는 것",22:"우주에 있는 별, 행성, 위성, 소행성 등을 모두 가리키는 말",
-23:"차갑거나 따뜻한 정도에 따라 색깔이 변하는 물감을 ○○○ 물감이라고 한다.",24:"녹이는 물질",
-25:"소금과 설탕이 물에 녹는 것처럼 어떤 물질이 다른 물질에 녹아 골고루 섞이는 현상",26:"같은 양의 물에 용매에 용해된 용질의 많고 적은 정도",
-27:"5단원 제목은 “다양한 ○○과 우리생활”이다.",28:"녹는 물질",30:"태양계에서 가장 작고 태양과 가장 가까운 행성",
-32:"태양계는 태양, 행성, 위성, ○○○, 혜성 등으로 구성되어 있다.",34:"실험하는 동안 관찰하거나 특정한 내용은 있는 그대로 빠짐없이 ○○합니다.",
-36:"자료의 뜻을 풀어내는 것.",39:"어떤 일을 진짜인 것처럼 꾸며내는 것",42:"실험결과에서 결론을 이끌어 내는 과정",
-43:"두 물질 사이에서 열의 이동을 줄이는 것",44:"○○○에 맞는 온도계를 사용해야 온도를 정확하게 측정할 수 있다.",
-45:"생명 과학 기술이나 연구 결과를 활용하여 일상생활의 다양한 문제를 해결하는 것",47:"현미경에서 관찰대상을 올려놓는 곳",
-48:"식물은 태양빛이 있어야 ○○○을 통해 필요한 양분을 만들 수 있다.",50:"과학 탐구 과정 중 궁금한 점을 명확하게 나타내는 것.",
-52:"태양계 행성 중 하나로 표현이 기체로 되어 있으며 커다란 고리가 있다.",54:"공기의 온도"
-};
-const down={
-1:"1단원 제목은“과학자처럼 00하기”이다.",2:"짚신벌레와 해캄같은 ㅇㅇㅇㅇ은 주로 논, 연못과 같이 물이 고인 곳에 산다.",
-3:"액체나 기체에서 온도가 높아진 물질이 위로 올라가고, 위에 있던 물질이 아래로 밀려 내려오는 과정",5:"현미경에서 눈으로 보는 렌즈",
-7:"물의 온도",9:"한 번 사용하면 다시 되돌릴 수 없는 것은?",10:"붙였다 떼었다 하는 종이",11:"별자리가 나오는 단원 제목",
-12:"지구의 에너지원이며 태양계에서 유일하게 스스로 빛을 내는 천체",14:"행성의 주위를 도는 천체(ex: 달)",
-17:"고체물질의 온도를 측정할 때는 주로 ○○○온도계를 사용한다",19:"현미경에서 대물렌즈의 배율을 조절하는 나사",
-21:"물체의 모습을 돋보기보다 더 확대해서 볼 수 있는 도구",23:"물체로부터 나오는 열을 감지해 온도에 따라 색깔로 나타내주는 특수한 사진기",
-24:"설탕을 녹이는 활동이 있는 단원의 제목",27:"셋 중 용액이 아닌 것은? (구강청정제. 파워에이드, 생딸기주스)",
-29:"태양계에서 지구와 크기가 가장 비슷한 행성.",31:"정확한 북쪽에 항상 있어서 나침반의 역할을 하는 별",
-33:"금속인 주전자의 몸체는 가열시 쉽게 뜨거워지지만 나무나 플라스틱인 손잡이 부분은 쉽게 뜨거워지지 않는 이유",35:"탐구 문제에 대한 잠정적인 해답을 예상하여 만든 진술.",
-36:"사람이 있을 때는 필요없는데, 사람이 없을 때 필요한 것.",37:"태양에서 가장 먼 행성",38:"마시면 살고 마시지 않으면 죽는 것",
-40:"북쪽 밤하늘에서는 북두칠성, ○○○○○, 카시오페이아자리를 볼 수 있다.",41:"온도계가 나오는 단원 제목",42:"실험결과를 해석하여 얻는 탐구 문제에 대한 답",
-46:"열의 이동을 줄이기 위해 사용하는 재료",48:"짚신벌레와 같이 맨눈으로 관찰하기 어려운 생물을 볼 때 쓰는 현미경",49:"참을성. “너는 왜 이렇게 000이 부족하냐?”",
-51:"지구처럼 태양의 주위를 도는 둥근 천체",53:"몸의 온도",55:"접촉한 두 물질의 온도가 변하는 이유"
-};
-
 /* ✅ 문제 출력 */
-Object.entries(across).forEach(([num,text])=>{
-    const p=document.createElement('p');p.id=`q-${num}`;p.innerHTML=`<strong>${num}.</strong> ${text}`;
+const across={3:"현미경에서 물체의 상을 확대해주는 렌즈",4:"곰팡이나 버섯 같은 생물",6:"실험하는 동안 ○○○○을 지킵니다.",8:"북극성은 ○○○○○○자리로 찾는다",10:"식물은 씨로, 균류는 ○○로 번식",12:"태양과 그 영향권의 천체",13:"별의 무리를 구분해 이름 붙인 것",15:"태양계에서 가장 큰 행성",16:"균류보다 작은 생물",18:"물질의 차갑거나 따뜻한 정도",20:"고체에서 열이 높은 곳에서 낮은 곳으로 이동",22:"우주에 있는 모든 물체",23:"색이 변하는 ○○○ 물감",24:"녹이는 물질",25:"물질이 녹아 섞이는 현상",26:"용질의 많고 적음",27:"“다양한 ○○과 우리생활”",28:"녹는 물질",30:"태양에 가장 가까운 행성",32:"태양계는 태양, 행성, ○○○로 구성",34:"빠짐없이 ○○합니다.",36:"자료의 뜻을 풀어내는 것",39:"어떤 일을 진짜인 것처럼 꾸며내는 것",42:"실험결과에서 결론 도출",43:"열의 이동 줄이는 것",44:"○○○에 맞는 온도계 사용",45:"과학 기술로 문제 해결",47:"현미경에서 관찰대상 올려놓는 곳",48:"태양빛으로 ○○○",50:"궁금한 점 명확히 나타내는 것",52:"큰 고리가 있는 행성",54:"공기의 온도"};
+const down={1:"1단원 제목은 과학자처럼 ○○하기",2:"짚신벌레와 해캄 같은 ○○○○",3:"가열된 물질이 위로 올라가는 과정",5:"현미경에서 눈으로 보는 렌즈",7:"물의 온도",9:"한 번 사용하면 되돌릴 수 없는 것",10:"붙였다 떼는 종이",11:"별자리가 나오는 단원 제목",12:"스스로 빛을 내는 천체",14:"행성의 주위를 도는 천체",17:"○○○온도계 사용",19:"대물렌즈 배율 조절",21:"물체를 확대해 보는 도구",23:"열을 감지해 색깔로 나타내는 사진기",24:"설탕 녹이는 단원 제목",27:"셋 중 용액이 아닌 것",29:"지구와 비슷한 크기의 행성",31:"나침반 역할을 하는 별",33:"고체에서 열이 이동하는 이유",35:"탐구 문제에 대한 예상 답",36:"사람이 없을 때 필요한 것",37:"태양에서 가장 먼 행성",38:"마시면 살고 마시지 않으면 죽는 것",40:"북쪽 하늘 별자리",41:"온도계가 나오는 단원 제목",42:"실험결과 해석 후 답",46:"열의 이동 줄이는 재료",48:"작은 생물 관찰 도구",49:"참을성 부족할 때 쓰는 말",51:"태양 주위를 도는 둥근 천체",53:"몸의 온도",55:"두 물질의 온도가 변하는 이유"};
+
+Object.entries(across).forEach(([n,t])=>{
+    const p=document.createElement('p');p.id=`q-${n}`;p.innerHTML=`<strong>${n}.</strong> ${t}`;
     document.getElementById('across').appendChild(p);
 });
-Object.entries(down).forEach(([num,text])=>{
-    const p=document.createElement('p');p.id=`q-${num}`;p.innerHTML=`<strong>${num}.</strong> ${text}`;
+Object.entries(down).forEach(([n,t])=>{
+    const p=document.createElement('p');p.id=`q-${n}`;p.innerHTML=`<strong>${n}.</strong> ${t}`;
     document.getElementById('down').appendChild(p);
 });
 
 /* ✅ 퍼즐 생성 */
-const horizontal=[...Object.keys(across).map(Number)];
-const vertical=[...Object.keys(down).map(Number)];
-let score=0;
-const scoreDisplay=document.getElementById('score');
 const puzzle=document.getElementById('puzzle');
-
 for(let r=0;r<23;r++){
     for(let c=0;c<17;c++){
         const cell=document.createElement('div');
@@ -214,7 +152,7 @@ for(let r=0;r<23;r++){
         if(pattern[r][c]==='o'){
             cell.classList.add('white');
             const input=document.createElement('input');
-            input.maxLength=1;input.dataset.row=r;input.dataset.col=c;
+            input.maxLength=1;
             input.addEventListener('input',checkAnswers);
             cell.appendChild(input);
         }
@@ -224,34 +162,37 @@ for(let r=0;r<23;r++){
 
 /* ✅ 번호 표시 */
 const printed=new Set();
-coords.forEach(([num,r,c])=>{
-    const idx=(r-1)*17+(c-1);
+coords.forEach(([num,row,col])=>{
+    const idx=(row-1)*17+(col-1);
     const cell=puzzle.children[idx];
     if(cell && cell.classList.contains('white') && !printed.has(num)){
         const span=document.createElement('span');
-        span.classList.add('number');span.textContent=num;
-        cell.appendChild(span);printed.add(num);
+        span.classList.add('number');
+        span.textContent=num;
+        cell.appendChild(span);
+        printed.add(num);
     }
 });
 
-/* ✅ 정답 검증 */
+/* ✅ 정답 체크 */
+let score=0;
+const scoreDisplay=document.getElementById('score');
 const solved=new Set();
 function checkAnswers(){
     for(const [num,word] of Object.entries(answers)){
-        const n=parseInt(num);let cells=[];
-        if(horizontal.includes(n)){
-            const start=coords.find(([x])=>x===n);if(!start)continue;
-            let [_,r,c]=start;
+        const n=parseInt(num);
+        const start=coords.find(([x])=>x===n);if(!start)continue;
+        let [_,row,col]=start;let cells=[];
+        const isAcross=Object.keys(across).includes(num);
+        if(isAcross){
             for(let i=0;i<word.length;i++){
-                const idx=(r-1)*17+(c-1+i);
+                const idx=(row-1)*17+(col-1+i);
                 const input=puzzle.children[idx]?.querySelector('input');
                 if(!input)continue;cells.push(input);
             }
-        }else if(vertical.includes(n)){
-            const start=coords.find(([x])=>x===n);if(!start)continue;
-            let [_,r,c]=start;
+        }else{
             for(let i=0;i<word.length;i++){
-                const idx=(r-1+i)*17+(c-1);
+                const idx=(row-1+i)*17+(col-1);
                 const input=puzzle.children[idx]?.querySelector('input');
                 if(!input)continue;cells.push(input);
             }

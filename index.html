@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>가로세로 퍼즐 (최종 완성)</title>
+<title>5학년 1학기 과학 가로세로 퍼즐</title>
 <style>
     body {
-        font-family:'Nanum Gothic',sans-serif;
-        text-align:center;
+        font-family: 'Nanum Gothic', sans-serif;
+        text-align: center;
         background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA5MDZfMyAg%2FMDAxNTA0NjU4MDg5MzYz.k_xvYKxGAe4D_fCtiMGCX-PLesGOkLUVM7HFrvGT5EQg.m1ipd6amBQKk1inByv0mpl-8lrww11uuyAgxoa8Wfd0g.JPEG.oasisman8%2F1.jpg&type=sc960_832') no-repeat center center fixed;
         background-size: cover;
         margin: 0;
@@ -20,66 +20,57 @@
         background: rgba(0,0,0,0.3);
         z-index: -1;
     }
-    h1 {margin:15px;font-size:1.8rem;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.8);}
-    .score {font-size:1.2rem;margin-bottom:15px;color:#fff;}
+    h1 {
+        margin: 15px;
+        font-size: 1.8rem;
+        color: #fff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    .score {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: #fff;
+    }
     .puzzle-container {
-        display:grid;
+        display: grid;
         grid-template-columns: repeat(17, minmax(18px, 1fr));
-        gap:2px;
-        justify-content:center;
-        margin:10px auto;
-        width:95vw;
-        max-width:680px;
+        gap: 2px;
+        justify-content: center;
+        margin: 10px auto;
+        width: 95vw;
+        max-width: 680px;
     }
     .cell {
-        border:1px solid #444;
-        position:relative;
-        background:#b0b0b0;
-        border-radius:4px;
-        aspect-ratio: 1 / 1;
-        display:flex;
-        justify-content:center;
-        align-items:center;
+        border: 1px solid #444;
+        position: relative;
+        background: #b0b0b0;
+        border-radius: 4px;
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .white input {
-        width:100%;height:100%;
-        text-align:center;
-        font-size:1em;
-        font-weight:bold;
-        border:none;
-        outline:none;
-        background:transparent;
-        color:#000;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 1em;
+        font-weight: bold;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #000;
     }
-    .white {background:#fff;}
-    .green {background:#4CAF50!important;transition:background 0.4s ease;}
-    .green input {background:#4CAF50;color:#fff;font-weight:bold;}
+    .white {background: #fff;}
+    .green {background: #4CAF50 !important;}
+    .green input {background: #4CAF50; color: #fff; font-weight: bold;}
     .number {
-        position:absolute;
-        top:1px;left:2px;
-        font-size:0.55em;
-        color:#000;
-    }
-    .questions {
-        max-width:95%;
-        margin:10px auto;
-        background:rgba(255,255,255,0.95);
-        padding:10px;
-        border-radius:8px;
-        box-shadow:0 2px 8px rgba(0,0,0,0.4);
-    }
-    .accordion-title {
-        background:#4CAF50;color:#fff;padding:8px;
-        cursor:pointer;font-weight:bold;text-align:left;
-        border-radius:4px;margin-bottom:5px;
-    }
-    .accordion-content {
-        display:none;padding:8px;text-align:left;font-size:14px;
-    }
-    .solved::after {content:" ✅";color:green;font-weight:bold;}
-    @media (max-width:768px){
-        .white input{font-size:3.5vw;}
-        h1{font-size:1.5rem;}
+        position: absolute;
+        top: 2px;
+        left: 3px;
+        font-size: 0.6em;
+        color: #000;
+        font-weight: bold;
     }
 </style>
 </head>
@@ -88,21 +79,8 @@
 <div class="score">점수: <span id="score">0</span></div>
 <div id="puzzle" class="puzzle-container"></div>
 
-<div class="questions">
-    <div class="accordion-title" onclick="toggleAccordion('across')">가로 문제 보기</div>
-    <div id="across" class="accordion-content"></div>
-    <div class="accordion-title" onclick="toggleAccordion('down')">세로 문제 보기</div>
-    <div id="down" class="accordion-content"></div>
-</div>
-
 <script>
-function toggleAccordion(id){
-    const el=document.getElementById(id);
-    el.style.display=(el.style.display==='block')?'none':'block';
-}
-
-/* ✅ 퍼즐 패턴 */
-const pattern=[
+const pattern = [
 "oxoxoxxxxooooooxx","oxoxooooxxoxxoxox","xxoxoxoxooxxoxoox","xooooxxxoxxxoxxxx",
 "ooxxxxoxoxoooxoox","xxooxxoxoxoxoxxxo","xoxxoooxxoxxoooxo","ooxxxxxxooxoxxxxo",
 "xxxxoooxxoxooxoox","xooxoxxxxoxoxxxxx","ooxxoxooxoxxoooox","xoxxoxoxoxxxoxoxo",
@@ -111,8 +89,8 @@ const pattern=[
 "xoxxxoxoooxxxxxxx","xoooxoxxxxxxxxxxx","xxxxxoxxxxxxxxxxx"
 ];
 
-/* ✅ 최종 좌표 데이터 (중복 제거 완료, 55개) */
-const coords=[
+// ✅ 번호 좌표
+const coords = [
 [1,1,1],[2,1,3],[3,4,2],[4,5,1],[5,1,5],[6,2,5],[7,2,7],[8,1,10],[9,1,11],
 [10,3,9],[11,3,13],[12,5,11],[13,7,13],[14,2,16],[15,3,15],[16,5,15],[17,6,17],
 [18,9,15],[19,8,12],[20,9,12],[21,7,10],[22,8,9],[23,9,5],[24,10,2],[25,11,1],
@@ -122,95 +100,36 @@ const coords=[
 [48,19,6],[49,16,3],[50,16,1],[51,16,6],[52,17,5],[53,16,9],[54,17,8],[55,1,14]
 ];
 
-/* ✅ 정답 */
-const answers={1:"탐구",2:"원생생물",3:"대물렌즈",4:"균류",5:"접안렌즈",6:"안전수칙",7:"수온",8:"카시오페이아",9:"시간",10:"포자",
-11:"태양계와별",12:"태양",13:"별자리",14:"위성",15:"목성",16:"세포",17:"적외선",18:"온도",19:"회전판",20:"전도",
-21:"실체현미경",22:"천체",23:"열변색",24:"용해와용액",25:"용해",26:"용액의진하기",27:"생물",28:"용질",29:"금성",
-30:"수성",31:"북극성",32:"소행성",33:"빠르기",34:"기록",35:"가설",36:"자료해석",37:"해왕성",38:"공기",39:"주작",
-40:"작은곰자리",41:"온도와열",42:"결론도출",43:"단열",44:"쓰임새",45:"첨단생명과학",46:"단열재",47:"재물대",
-48:"광학현미경",49:"인내심",50:"문제인식",51:"행성",52:"토성",53:"체온",54:"기온",55:"이동"};
-
-/* ✅ 네가 준 원본 문제 (문제 부분만) */
-const across={
-3:"현미경에서 물체의 상을 확대해주는 렌즈",
-4:"곰팡이나 버섯 같은 생물로, 보통 거미줄처럼 가늘고 긴 모양의 균사로 이루어져 있고 포자로 번식함.",
-6:"실험하는 동안 ○○○○을 지킵니다.",
-8:"북극성은 밤하늘에서 북두칠성이나 ○○○○○○자리를 이용해 찾을 수 있다",
-10:"식물은 씨로 번식하고 균류는 ○○로 번식한다.",
-12:"태양과 태양의 영향을 받는 천체들 그리고 그 공간",
-13:"별의 무리를 구분해 사람이나 사물 또는 동물의 이름을 붙인 것",
-15:"태양계에서 가장 큰 행성으로 기체형 행성이다.",
-16:"균류나 원생식물보다 크기가 더 작고 생김새가 단순한 생물",
-18:"물질의 차갑거나 따뜻한 정도",
-20:"고체에서 열이 온도가 높은 곳에서 낮은 곳으로 고체 물질을 따라 이동하는 것",
-22:"우주에 있는 별, 행성, 위성, 소행성 등을 모두 가리키는 말",
-23:"차갑거나 따뜻한 정도에 따라 색깔이 변하는 물감을 ○○○ 물감이라고 한다.",
-24:"녹이는 물질",
-25:"소금과 설탕이 물에 녹는 것처럼 어떤 물질이 다른 물질에 녹아 골고루 섞이는 현상",
-26:"같은 양의 물에 용매에 용해된 용질의 많고 적은 정도",
-27:"5단원 제목은 “다양한 ○○과 우리생활”이다.",
-28:"녹는 물질",
-30:"태양계에서 가장 작고 태양과 가장 가까운 행성",
-32:"태양계는 태양, 행성, 위성, ○○○, 혜성 등으로 구성되어 있다.",
-34:"실험하는 동안 관찰하거나 특정한 내용은 있는 그대로 빠짐없이 ○○합니다.",
-36:"자료의 뜻을 풀어내는 것.",
-39:"어떤 일을 진짜인 것처럼 꾸며내는 것",
-42:"실험결과에서 결론을 이끌어 내는 과정",
-43:"두 물질 사이에서 열의 이동을 줄이는 것",
-44:"○○○에 맞는 온도계를 사용해야 온도를 정확하게 측정할 수 있다.",
-45:"생명 과학 기술이나 연구 결과를 활용하여 일상생활의 다양한 문제를 해결하는 것",
-47:"현미경에서 관찰대상을 올려놓는 곳",
-48:"식물은 태양빛이 있어야 ○○○을 통해 필요한 양분을 만들 수 있다.",
-50:"과학 탐구 과정 중 궁금한 점을 명확하게 나타내는 것.",
-52:"태양계 행성 중 하나로 표현이 기체로 되어 있으며 커다란 고리가 있다.",
-54:"공기의 온도"
-};
-const down={
-1:"1단원 제목은“과학자처럼 00하기”이다.",
-2:"짚신벌레와 해캄같은 ㅇㅇㅇㅇ은 주로 논, 연못과 같이 물이 고인 곳에 산다.",
-3:"액체나 기체에서 온도가 높아진 물질이 위로 올라가고, 위에 있던 물질이 아래로 밀려 내려오는 과정",
-5:"현미경에서 눈으로 보는 렌즈",
-7:"물의 온도",
-9:"한 번 사용하면 다시 되돌릴 수 없는 것은?",
-10:"붙였다 떼었다 하는 종이",
-11:"별자리가 나오는 단원 제목",
-12:"지구의 에너지원이며 태양계에서 유일하게 스스로 빛을 내는 천체",
-14:"행성의 주위를 도는 천체(ex: 달)",
-17:"고체물질의 온도를 측정할 때는 주로 ○○○온도계를 사용한다",
-19:"현미경에서 대물렌즈의 배율을 조절하는 나사",
-21:"물체의 모습을 돋보기보다 더 확대해서 볼 수 있는 도구",
-23:"물체로부터 나오는 열을 감지해 온도에 따라 색깔로 나타내주는 특수한 사진기",
-24:"설탕을 녹이는 활동이 있는 단원의 제목",
-27:"셋 중 용액이 아닌 것은? (구강청정제. 파워에이드, 생딸기주스)",
-29:"태양계에서 지구와 크기가 가장 비슷한 행성.",
-31:"정확한 북쪽에 항상 있어서 나침반의 역할을 하는 별",
-33:"금속인 주전자의 몸체는 가열시 쉽게 뜨거워지지만 나무나 플라스틱인 손잡이 부분은 쉽게 뜨거워지지 않는 이유",
-35:"탐구 문제에 대한 잠정적인 해답을 예상하여 만든 진술.",
-36:"사람이 있을 때는 필요없는데, 사람이 없을 때 필요한 것.",
-37:"태양에서 가장 먼 행성",
-38:"마시면 살고 마시지 않으면 죽는 것",
-40:"북쪽 밤하늘에서는 북두칠성, ○○○○○, 카시오페이아자리를 볼 수 있다.",
-41:"온도계가 나오는 단원 제목",
-42:"실험결과를 해석하여 얻는 탐구 문제에 대한 답",
-46:"열의 이동을 줄이기 위해 사용하는 재료",
-48:"짚신벌레와 같이 맨눈으로 관찰하기 어려운 생물을 볼 때 쓰는 현미경",
-49:"참을성. “너는 왜 이렇게 000이 부족하냐?”",
-51:"지구처럼 태양의 주위를 도는 둥근 천체",
-53:"몸의 온도",
-55:"접촉한 두 물질의 온도가 변하는 이유"
+// ✅ 정답 (좌표 기반, 가로+세로)
+const answers = {
+"0-0":"탐","0-2":"원","0-4":"접","0-9":"카","0-10":"시","0-11":"오","0-12":"페","0-13":"이","0-14":"아",
+"1-0":"구","1-2":"생","1-4":"안","1-5":"전","1-6":"수","1-7":"칙","1-10":"간","1-13":"동","1-15":"위",
+"2-2":"생","2-4":"렌","2-6":"온","2-8":"포","2-9":"자","2-12":"태","2-14":"목","2-15":"성",
+"3-1":"대","3-2":"물","3-3":"렌","3-4":"즈","3-8":"스","3-12":"양",
+"4-0":"균","4-1":"류","4-6":"북","4-8":"트","4-10":"태","4-11":"양","4-12":"계","4-14":"세","4-15":"포",
+"5-2":"용","5-3":"질","5-6":"극","5-8":"잇","5-10":"양","5-12":"와","5-16":"적",
+"6-1":"금","6-4":"소","6-5":"행","6-6":"성","6-9":"실","6-12":"별","6-13":"자","6-14":"리","6-16":"외",
+"7-0":"수","7-1":"성","7-8":"천","7-9":"체","7-11":"회","7-16":"선",
+"8-4":"열","8-5":"변","8-6":"색","8-9":"현","8-11":"전","8-12":"도","8-14":"온","8-15":"도",
+"9-1":"용","9-2":"매","9-4":"화","9-9":"미","9-11":"판",
+"10-0":"용","10-1":"해","10-4":"상","10-6":"생","10-7":"물","10-9":"경","10-12":"자","10-13":"료","10-14":"해","10-15":"석",
+"11-1":"와","11-4":"사","11-6":"딸","11-9":"빠","11-12":"물","11-14":"왕","11-16":"공",
+"12-1":"용","12-2":"액","12-3":"의","12-4":"진","12-5":"하","12-6":"기","12-8":"르","12-12":"쇠","12-14":"성","12-16":"기",
+"13-1":"액","13-4":"기","13-6":"주","13-8":"기","13-9":"록",
+"14-6":"스","14-7":"가","14-13":"주","14-14":"작",
+"15-0":"문","15-1":"제","15-2":"인","15-3":"식","15-5":"행","15-8":"체","15-10":"설","15-14":"은",
+"16-2":"내","16-4":"토","16-5":"성","16-7":"기","16-8":"온","16-11":"온","16-14":"곰",
+"17-2":"심","17-9":"결","17-10":"론","17-11":"도","17-12":"출","17-14":"자",
+"18-5":"광","18-6":"합","18-7":"성","18-9":"론","18-11":"와","18-14":"리",
+"19-0":"첨","19-1":"단","19-2":"생","19-3":"명","19-4":"과","19-5":"학","19-10":"단","19-11":"열",
+"20-5":"현","20-7":"쓰","20-8":"임","20-9":"새",
+"21-1":"재","21-2":"물","21-3":"대","21-5":"미",
+"22-5":"경"
 };
 
-Object.entries(across).forEach(([n,t])=>{
-    const p=document.createElement('p');p.id=`q-${n}`;p.innerHTML=`<strong>${n}.</strong> ${t}`;
-    document.getElementById('across').appendChild(p);
-});
-Object.entries(down).forEach(([n,t])=>{
-    const p=document.createElement('p');p.id=`q-${n}`;p.innerHTML=`<strong>${n}.</strong> ${t}`;
-    document.getElementById('down').appendChild(p);
-});
-
-/* ✅ 퍼즐 생성 */
 const puzzle=document.getElementById('puzzle');
+
+// ✅ 퍼즐 그리기
 for(let r=0;r<23;r++){
     for(let c=0;c<17;c++){
         const cell=document.createElement('div');
@@ -219,60 +138,40 @@ for(let r=0;r<23;r++){
             cell.classList.add('white');
             const input=document.createElement('input');
             input.maxLength=1;
-            input.addEventListener('input',checkAnswers);
+            input.dataset.row=r;
+            input.dataset.col=c;
             cell.appendChild(input);
         }
         puzzle.appendChild(cell);
     }
 }
 
-/* ✅ 번호 표시 (중복 허용 X) */
-const printed=new Set();
+// ✅ 번호 표시
 coords.forEach(([num,row,col])=>{
     const idx=(row-1)*17+(col-1);
     const cell=puzzle.children[idx];
-    if(cell && cell.classList.contains('white') && !printed.has(idx)){
+    if(cell && cell.classList.contains('white')){
         const span=document.createElement('span');
-        span.classList.add('number');
-        span.textContent=num;
+        span.classList.add('number');span.textContent=num;
         cell.appendChild(span);
-        printed.add(idx);
     }
 });
 
-/* ✅ 정답 체크 */
 let score=0;
-const scoreDisplay=document.getElementById('score');
-const solved=new Set();
-function checkAnswers(){
-    for(const [num,word] of Object.entries(answers)){
-        const n=parseInt(num);
-        const start=coords.find(([x])=>x===n);if(!start)continue;
-        let [_,row,col]=start;let cells=[];
-        const isAcross=Object.keys(across).includes(num);
-        if(isAcross){
-            for(let i=0;i<word.length;i++){
-                const idx=(row-1)*17+(col-1+i);
-                const input=puzzle.children[idx]?.querySelector('input');
-                if(!input)continue;cells.push(input);
-            }
-        }else{
-            for(let i=0;i<word.length;i++){
-                const idx=(row-1+i)*17+(col-1);
-                const input=puzzle.children[idx]?.querySelector('input');
-                if(!input)continue;cells.push(input);
-            }
-        }
-        if(cells.length!==word.length)continue;
-        const guess=cells.map(x=>x.value.trim()).join('');
-        if(guess===word && !solved.has(n)){
-            solved.add(n);
-            cells.forEach(c=>c.parentElement.classList.add('green'));
-            document.getElementById(`q-${n}`).classList.add('solved');
-            score+=100;scoreDisplay.textContent=score;
-        }
+
+// ✅ 체크 로직 (IME 대응)
+function checkLetter(input){
+    const key=`${input.dataset.row}-${input.dataset.col}`;
+    const val=input.value.trim();
+    if(answers[key] && val===answers[key] && !input.parentElement.classList.contains('green')){
+        input.parentElement.classList.add('green');
+        score+=10;
+        document.getElementById('score').textContent=score;
     }
 }
+document.querySelectorAll('input').forEach(el=>{
+    el.addEventListener('input',()=>setTimeout(()=>checkLetter(el),0));
+});
 </script>
 </body>
 </html>

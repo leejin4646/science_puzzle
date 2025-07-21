@@ -3,81 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5학년 1학기 과학 가로세로 퍼즐</title>
+<title>가로세로 퍼즐 최종</title>
 <style>
     body {
-        font-family: 'Nanum Gothic', sans-serif;
-        text-align: center;
-        background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA5MDZfMyAg%2FMDAxNTA0NjU4MDg5MzYz.k_xvYKxGAe4D_fCtiMGCX-PLesGOkLUVM7HFrvGT5EQg.m1ipd6amBQKk1inByv0mpl-8lrww11uuyAgxoa8Wfd0g.JPEG.oasisman8%2F1.jpg&type=sc960_832') no-repeat center center fixed;
-        background-size: cover;
-        margin: 0;
+        font-family:'Nanum Gothic',sans-serif;
+        text-align:center;
+        background:url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA5MDZfMyAg%2FMDAxNTA0NjU4MDg5MzYz.k_xvYKxGAe4D_fCtiMGCX-PLesGOkLUVM7HFrvGT5EQg.m1ipd6amBQKk1inByv0mpl-8lrww11uuyAgxoa8Wfd0g.JPEG.oasisman8%2F1.jpg&type=sc960_832') no-repeat center center fixed;
+        background-size:cover;margin:0;
     }
     body::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.3);
-        z-index: -1;
+        content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:-1;
     }
-    h1 {
-        margin: 15px;
-        font-size: 1.8rem;
-        color: #fff;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
-    .score {
-        font-size: 1.2rem;
-        margin-bottom: 15px;
-        color: #fff;
-    }
+    h1 {margin:15px;font-size:1.8rem;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.8);}
+    .score {font-size:1.2rem;margin-bottom:15px;color:#fff;}
     .puzzle-container {
-        display: grid;
-        grid-template-columns: repeat(17, minmax(18px, 1fr));
-        gap: 2px;
-        justify-content: center;
-        margin: 10px auto;
-        width: 95vw;
-        max-width: 680px;
+        display:grid;grid-template-columns:repeat(17,minmax(18px,1fr));
+        gap:2px;justify-content:center;margin:10px auto;width:95vw;max-width:680px;
     }
     .cell {
-        border: 1px solid #444;
-        position: relative;
-        background: #b0b0b0;
-        border-radius: 4px;
-        aspect-ratio: 1/1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border:1px solid #444;position:relative;background:#b0b0b0;border-radius:4px;
+        aspect-ratio:1/1;display:flex;justify-content:center;align-items:center;
     }
-    .white input {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        font-size: 1em;
-        font-weight: bold;
-        border: none;
-        outline: none;
-        background: transparent;
-        color: #000;
-    }
-    .white {background: #fff;}
-    .green {background: #4CAF50 !important;}
-    .green input {background: #4CAF50; color: #fff; font-weight: bold;}
-    .number {
-        position: absolute;
-        top: 2px;
-        left: 3px;
-        font-size: 0.6em;
-        color: #000;
-        font-weight: bold;
-    }
+    .white input {width:100%;height:100%;text-align:center;font-size:1em;font-weight:bold;border:none;outline:none;background:transparent;color:#000;}
+    .white {background:#fff;}
+    .green {background:#4CAF50!important;transition:background 0.4s ease;}
+    .green input {background:#4CAF50;color:#fff;font-weight:bold;}
+    .number {position:absolute;top:1px;left:2px;font-size:0.55em;color:#000;}
+    .questions {max-width:95%;margin:10px auto;background:rgba(255,255,255,0.95);padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.4);}
+    .accordion-title {background:#4CAF50;color:#fff;padding:8px;cursor:pointer;font-weight:bold;text-align:left;border-radius:4px;margin-bottom:5px;}
+    .accordion-content {display:none;padding:8px;text-align:left;font-size:14px;}
+    .solved::after {content:" ✅";color:green;font-weight:bold;}
+    @media(max-width:768px){.white input{font-size:3.5vw;}h1{font-size:1.5rem;}}
 </style>
 </head>
 <body>
 <h1>5학년 1학기 과학 가로세로 퍼즐</h1>
 <div class="score">점수: <span id="score">0</span></div>
 <div id="puzzle" class="puzzle-container"></div>
+
+<!-- ✅ 문제 리스트 -->
+<div class="questions">
+    <h2>가로 문제</h2>
+    <ul>
+        <li>3. 현미경에서 물체의 상을 확대해주는 렌즈</li>
+        <li>4. 곰팡이나 버섯 같은 생물로, 보통 거미줄처럼 가늘고 긴 모양의 균사로 이루어져 있고 포자로 번식함.</li>
+        <li>6. 실험하는 동안 ○○○○을 지킵니다.</li>
+        <li>8. 북극성은 밤하늘에서 북두칠성이나 ○○○○○○자리를 이용해 찾을 수 있다</li>
+        <li>10. 식물은 씨로 번식하고 균류는 ○○로 번식한다.</li>
+        <li>12. 태양과 태양의 영향을 받는 천체들 그리고 그 공간</li>
+        <li>13. 별의 무리를 구분해 사람이나 사물 또는 동물의 이름을 붙인 것</li>
+        <li>15. 태양계에서 가장 큰 행성으로 기체형 행성이다</li>
+        <li>16. 균류나 원생식물보다 크기가 더 작고 생김새가 단순한 생물</li>
+        <li>18. 물질의 차갑거나 따뜻한 정도</li>
+        <li>20. 고체에서 열이 온도가 높은 곳에서 낮은 곳으로 고체 물질을 따라 이동하는 것</li>
+        <li>22. 우주에 있는 별, 행성, 위성, 소행성 등을 모두 가리키는 말</li>
+        <li>23. 차갑거나 따뜻한 정도에 따라 색깔이 변하는 물감을 ○○○ 물감이라고 한다.</li>
+        <li>24. 녹이는 물질</li>
+        <li>25. 소금과 설탕이 물에 녹는 것처럼 어떤 물질이 다른 물질에 녹아 골고루 섞이는 현상</li>
+        <li>26. 같은 양의 물에 용매에 용해된 용질의 많고 적은 정도</li>
+        <li>27. 5단원 제목은 “다양한 ○○과 우리생활”이다.</li>
+        <li>28. 녹는 물질</li>
+        <li>30. 태양계에서 가장 작고 태양과 가장 가까운 행성</li>
+        <li>32. 태양계는 태양, 행성, 위성, ○○○, 혜성 등으로 구성되어 있다.</li>
+        <li>34. 실험하는 동안 관찰하거나 특정한 내용은 있는 그대로 빠짐없이 ○○합니다.</li>
+        <li>36. 자료의 뜻을 풀어내는 것.</li>
+        <li>39. 어떤 일을 진짜인 것처럼 꾸며내는 것</li>
+        <li>42. 실험결과에서 결론을 이끌어 내는 과정</li>
+        <li>43. 두 물질 사이에서 열의 이동을 줄이는 것</li>
+        <li>44. ○○○에 맞는 온도계를 사용해야 온도를 정확하게 측정할 수 있다.</li>
+        <li>45. 생명 과학 기술이나 연구 결과를 활용하여 일상생활의 다양한 문제를 해결하는 것</li>
+        <li>47. 현미경에서 관찰대상을 올려놓는 곳</li>
+        <li>48. 식물은 태양빛이 있어야 ○○○을 통해 필요한 양분을 만들 수 있다.</li>
+        <li>50. 궁금한 점을 명확하게 나타내는 것</li>
+        <li>52. 태양계 행성 중 하나로 표현이 기체로 되어 있으며 커다란 고리가 있다.</li>
+        <li>54. 공기의 온도</li>
+    </ul>
+
+    <h2>세로 문제</h2>
+    <ul>
+        <li>1. 1단원 제목은 “과학자처럼 00하기”이다.</li>
+        <li>2. 짚신벌레와 해캄같은 생물로 주로 논, 연못과 같이 물이 고인 곳에서 산다.</li>
+        <li>3. 액체나 기체에서 온도가 높아진 물질이 위로 올라가고, 위에 있던 물질이 아래로 내려오는 과정</li>
+        <li>5. 현미경에서 눈으로 보는 렌즈</li>
+        <li>7. 물의 온도</li>
+        <li>9. 한 번 사용하면 다시 되돌릴 수 없는 것은?</li>
+        <li>10. 붙였다 떼었다 하는 종이</li>
+        <li>11. 2단원 제목</li>
+        <li>12. 지구의 에너지원이며 태양계에서 유일하게 스스로 빛을 내는 천체</li>
+        <li>14. 행성의 주위를 도는 천체(ex: 달)</li>
+        <li>17. 고체물질의 온도를 측정할 때는 주로 ○○○온도계를 사용한다</li>
+        <li>19. 현미경에서 대물렌즈의 배율을 조절하는 나사</li>
+        <li>21. 물체의 모습을 돋보기보다 더 확대해서 볼수 있는 도구</li>
+        <li>23. 물체로부터 나오는 열을 감지해 온도에 따라 여러가지 색깔로 나타내주는 특수한 사진기</li>
+        <li>24. 3단원 제목</li>
+        <li>27. 용액이 아닌 것은? (구강청정제. 파워에이드, 생딸기주스)</li>
+        <li>29. 태양계에서 지구와 크기가 가장 비슷한 행성.</li>
+        <li>31. 정확한 북쪽에 항상 있어서 나침반의 역할을 하는 별</li>
+        <li>33. 금속인 주전자의 몸체는 가열시 쉽게 뜨거워지지만 나무나 플라스틱인 손잡이 부분은 쉽게 뜨거워지지 않는 이유</li>
+        <li>35. 탐구 문제에 대한 잠정적인 해답을 예상하여 만든 진술</li>
+        <li>36. 사람이 있을 때는 필요없는데, 사람이 없을 때 필요한 것.</li>
+        <li>37. 태양에서 가장 먼 행성</li>
+        <li>38. 마시면 살고 마시지 않으면 죽는 것</li>
+        <li>40. 북쪽 밤하늘에서는 북두칠성, ○○○○○, 카시오페이아자리</li>
+        <li>41. 1단원 제목</li>
+        <li>42. 실험결과를 해석하여 얻는 탐구 문제에 대한 답</li>
+        <li>46. 열의 이동을 줄이기 위해 사용하는 재료</li>
+        <li>48. 짚신 벌레와 같이 맨눈으로 관찰하기 어려운 생물은 ○○○○○으로 자세히 볼 수 있다.</li>
+        <li>49. 참을성. “너는 왜 이렇게 000이 부족하냐?”</li>
+        <li>51. 지구처럼 태양의 주위를 도는 둥근 천체</li>
+        <li>53. 몸의 온도</li>
+        <li>55. 접촉한 두 물질의 온도가 변하는 까닭</li>
+    </ul>
+</div>
 
 <script>
 const pattern = [
